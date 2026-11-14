@@ -41,6 +41,17 @@ npm run dev
 npm run build
 ```
 
+### Build the Unreal App Bundle
+
+```sh
+npm run build:unreal
+```
+
+This builds the same `App.vue` used by the browser with the NativeWeb renderer
+in `src/unreal`. Copy `ui.js`, `ui.css`, and the `fonts` directory from
+`dist/unreal` into the Unreal project's `Content/NativeWeb/Vue` directory.
+The demo actor provides the `nativeWeb` bridge and an `#app` mount root.
+
 ### Run Unit Tests with [Vitest](https://vitest.dev/)
 
 ```sh
