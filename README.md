@@ -17,7 +17,7 @@
   <a href="https://github.com/ArtemIyX/QuickJSUnreal"><img src="https://img.shields.io/badge/JavaScript-QuickJS-f7df1e?logo=javascript&logoColor=black" alt="QuickJS" /></a>
   <a href="https://github.com/ArtemIyX/NativeWebUnreal"><img src="https://img.shields.io/badge/Unreal-NativeWeb-0e7490" alt="NativeWebUnreal" /></a>
   <a href="https://github.com/ArtemIyX/NativeWebUnreal"><img src="https://img.shields.io/badge/Runtime-No%20Chromium-555555" alt="No Chromium runtime" /></a>
-  <a href="#about-this-example"><img src="https://img.shields.io/badge/Project-Example_App-8a2be2" alt="Example app" /></a>
+  <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-green?style=flat"></a>
 </p>
 
 </div>
