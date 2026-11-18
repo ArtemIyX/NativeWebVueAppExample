@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import NativeImage from './components/NativeImage.vue'
 
 const count = ref(0)
 
@@ -21,6 +22,17 @@ function reset() {
         <p class="eyebrow"><span class="status-dot"></span>You did it!</p>
         <h1 id="counter-title">A little progress adds up.</h1>
         <p class="description">One click at a time. How far can you go?</p>
+
+        <NativeImage
+          class="sample-image"
+          provider="asset"
+          image-key="/Game/UI/T_NativeWebSample.T_NativeWebSample"
+          alt="Sample image loaded from an Unreal texture"
+        >
+          <template #loading><span class="image-overlay">Loading Unreal texture…</span></template>
+          <template #error><span class="image-overlay">Add T_NativeWebSample to /Game/UI</span></template>
+          <span class="image-caption">NativeWeb texture image</span>
+        </NativeImage>
 
         <div class="counter-display" aria-live="polite" aria-atomic="true">
           <span class="counter-label">CURRENT COUNT</span>
@@ -162,6 +174,27 @@ h1 {
   color: #9b9eae;
   font-size: 15px;
   line-height: 1.6;
+}
+
+.sample-image {
+  display: flex;
+  min-height: 96px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 22px;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 8%);
+  border-radius: 12px;
+  background: rgb(7 9 16 / 40%);
+  color: #9b9eae;
+  font-size: 12px;
+}
+
+.image-overlay,
+.image-caption {
+  position: static;
+  inset: auto;
+  padding: 12px;
 }
 
 .counter-display {

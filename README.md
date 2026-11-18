@@ -89,6 +89,22 @@ npm run build:unreal
 
 The build creates `ui.js`, `ui.css`, and a `fonts` directory in `dist/unreal`. Copy them into your Unreal project's `Content/NativeWeb/Vue` directory. The NativeWebUnreal demo setup provides the `nativeWeb` bridge and the `#app` mount root.
 
+## Loading Unreal texture images
+
+`NativeImage` requests a texture through NativeWeb and releases its lease when its `imageKey` changes or the component unmounts. The key is provider-specific; the built-in `asset` provider accepts a soft object path. Create and cook the referenced texture in the project, for example `/Game/UI/T_NativeWebSample.T_NativeWebSample`, then provide it as `image-key`:
+
+```vue
+<NativeImage provider="asset" image-key="/Game/UI/T_Icon.T_Icon" alt="Inventory icon">
+  <template #loading>Loading…</template>
+  <template #error>Image unavailable</template>
+  <span class="image-label">Inventory</span>
+</NativeImage>
+```
+
+The `loading` and `error` slots show request state. The default slot is a layer over the ready image. `load` and `error` events are also emitted. The browser preview has no NativeWeb bridge and displays the error slot.
+
+NativeWeb supports sampled, single-slice, single-sample `Texture2D` color assets. Virtual textures, arrays, depth formats and unsupported texture formats are rejected. Images are normalized on the GPU to a maximum 4096 by 4096 RGBA8 texture while preserving their aspect ratio. Cache defaults are 128 entries, 32 pending provider loads, 64 MiB of GPU allocations, and 10 seconds idle before eviction; active image leases remain pinned. Projects can subclass `UNativeWebImageProvider` in C++ and register a namespace on `UNativeWebImageSubsystem` for app-specific keys.
+
 ## Project layout
 
 | Path | Purpose |
@@ -97,6 +113,8 @@ The build creates `ui.js`, `ui.css`, and a `fonts` directory in `dist/unreal`. C
 | `src/main.ts` | Browser preview entry point |
 | `src/unreal/main.ts` | Custom Vue renderer and NativeWeb bridge integration |
 | `src/unreal/native-web.d.ts` | TypeScript declarations for the NativeWeb bridge |
+| `src/components/NativeImage.vue` | Lease-safe asynchronous Unreal texture component |
+| `src/composables/useNativeImage.ts` | Native image request and cleanup lifecycle |
 | `src/unreal/style.css` | Styles and font declarations for the Unreal build |
 | `vite.unreal.config.ts` | Unreal bundle configuration |
 
